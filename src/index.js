@@ -1,8 +1,9 @@
 import {createHome} from "./homepage/homepage"
 import "./main.css"
+import { createMenu } from "./menu/menu"
 
 export const body = document.querySelector('body')
-function createContentDiv(){
+export function createContentDiv(){
     const contentDiv = document.createElement('div')
     contentDiv.setAttribute("id", "content")
     body.appendChild(contentDiv)
@@ -33,8 +34,42 @@ function createFooter(){
 
     body.appendChild(footer)
 }
+
 createNavTab();
 createContentDiv();
 createFooter();
+const htmlElements = (()=>{
+
+    const contentDiv = document.getElementById('content')
+    const navList = document.getElementsByClassName('nav-list')
+    const listItems = Array.from(document.querySelectorAll('li'))
+
+    return {
+        contentDiv,
+        navList,
+        listItems,
+    }
+})();
+
+window.addEventListener('load', createHome())
+
+function changePage(){
+    htmlElements.listItems.forEach(item => {
+        item.addEventListener('click', (e)=>{
+            clearContent()
+            if(e.target.textContent === 'Home') createHome()
+            else if(e.target.textContent ==='Menu') createMenu()
+        })
+    })
+
+}
+function clearContent(){
+    while(htmlElements.contentDiv.firstChild){
+        htmlElements.contentDiv.firstChild.remove()
+        console.log(htmlElements.contentDiv)
+    }
+
+}
+changePage()
 // createHome()
 console.log('from indexjs')

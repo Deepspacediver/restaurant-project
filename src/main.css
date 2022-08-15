@@ -41,11 +41,15 @@ body{
 }
 
 #content * {
-    flex-basis: 66%;
+    flex-basis: 70%;
 }
 
-#content img {
-    max-width: 50%;
+img {
+    vertical-align: middle;
+    border-style: none;
+    width: 100%;
+    height: auto;
+    max-width: 600px;
 
 }
 
